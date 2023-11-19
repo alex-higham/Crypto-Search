@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const axios = require('axios');
 
-// Midleware and MongoDB
+// Midleware
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
