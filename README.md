@@ -88,3 +88,50 @@ Data: {
 }
 
 }  
++-------------------+       +-------------------------+       +-------------------------+
+| User's Service    |       | Your Coin Microservice |       | External CoinMarketCap  |
++-------------------+       +-------------------------+       +-------------------------+
+          |                             |                                   |
+          |     Request for Data        |                                   |
+          | --------------------------> |                                   |
+          |                             |                                   |
+          |                             |                                   |
+          |                             |                                   |
+          |                             |                                   |
+          |                             |                                   |
+          |                             |                                   |
+          |                             |                                   |
+          |                             |     Request for Data            |
+          |                             | ----------------------------> |
+          |                             |                                   |
+          |                             |                                   |
+          |                             |                                   |
+          |                             |                                   |
+          |                             |                                   |
+          |                             |                                   |
+          |                             |     Retrieve Data               |
+          |                             | <-------------------------------|
+          |     Receive Data            |                                   |
+          | <-------------------------- |                                   |
+          |                             |                                   |
+          |                             |                                   |
+
+Explanation:
+
+    User's Service Initiates Request:
+        The User's Service initiates a request for cryptocurrency data by making an HTTP GET request to Your Coin Microservice.
+
+    Coin Microservice Forwards Request:
+        Your Coin Microservice, upon receiving the request, may forward the request to an external service like CoinMarketCap to retrieve the necessary cryptocurrency data.
+
+    External Service Processes Request:
+        The External CoinMarketCap service processes the request and returns the relevant cryptocurrency data.
+
+    Coin Microservice Retrieves Data:
+        Your Coin Microservice receives the data from the External CoinMarketCap service and processes it if needed.
+
+    Coin Microservice Responds to User's Service:
+        Your Coin Microservice sends the processed data back to the User's Service in the form of an HTTP response.
+
+    User's Service Receives Data:
+        The User's Service receives the data and can then handle it as necessary.
