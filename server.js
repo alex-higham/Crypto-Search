@@ -14,11 +14,13 @@ app.use(express.json());
 app.get('/get_coin/:symbol', async (req, res) => {
   const { symbol } = req.params;
   try {
+    const symbolsArray = symbol.split(',');
+
     const response = await axios.get('https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest', {
-    params: {
-      symbol: symbol,
-    },  
-    headers: {
+      params: {
+        symbol: symbolsArray.join(','),
+      },
+      headers: {
         'X-CMC_PRO_API_KEY': key,
       },
     });
@@ -48,14 +50,13 @@ app.get('/get_coin/:symbol', async (req, res) => {
     } else {
       // success
       const coin_data = response.data
-      console.log('Symbol:', symbol);
-      console.log('Data:', coin_data.data)
-      console.log(coin_data);
+      const replacer = (key, value) => (key === 'tags' ? undefined : value);
+      console.log('Symbols:', symbolsArray);
+      console.log('Data:', JSON.stringify(coin_data, replacer, 2));
       res.status(200).json(coin_data);
     }
   } catch (error) {
     response = null;
-    // handle other errors
     console.error(error);
     res.status(500).json({ status: 500, message: `Internal Server Error: ${error.message}` });
   }
