@@ -1,7 +1,7 @@
 # Crypto-Search
 The server.js script is a microservice that receives requests to search coinmarketcap using the cryptocurrency symbol as a search parameter.  It will return a JSON file with the values of the coin below when using the curl command: curl http://localhost:PORT/get_coin/:symbol where PORT is 3001 or a .env PORT variable and :symbol is the user input for the cryptocurrency symbol. It will also take request calls from other programs using a promise based http request service like axios.  This program has only been tested using node.js and curl console commands, so some tweaking may be necessary if you're using another service. 
 
-To request data from this microservice, add the axios dependency or other variant that uses a promise-based HTTP library to fetch data.  In the get request, use the http://localhost:PORT/get_coin/${symbols.join(',')}, where PORT is either 3001, or another designated port of your choice.  The response.data will hold the JSON file with the cryptocurrency variables that can be parsed as needed.  
+To request data from this microservice, add the axios dependency or other variant that uses a promise-based HTTP library to fetch data.  In the get request, use the http://localhost:PORT/get_coin/:symbols, where PORT is either 3001, or another designated port of your choice, and symbols is the requested cryptocurrency you'd like to get info on.  The response.data will hold the JSON file with the cryptocurrency variables that can be parsed as needed.  
 const axios = require('axios');
 
 const query_coin = async (symbols) => {
